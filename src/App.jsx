@@ -8,8 +8,8 @@ import StatsCard from './components/StatsCard/StatsCard';
 import LeafletMap from './components/LeafletMap/LeafletMap';
 import "leaflet/dist/leaflet.css";
 import LineGraph from './components/LineGraph/LineGraph';
+import { API_PREFIX } from './config';
 
-const API_PREFIX = "https://disease.sh/v3/covid-19";
 const defaultMapConfig = {
   center: { lat: 20.5937, lng: 78.9629 },
   zoom: 3
@@ -62,7 +62,7 @@ function App() {
           setCountries(countries);
           setCountriesWithCasesInfo(countryWithRequiredData);
         });
-    }
+    };
     getAllCountryData();
   }, []);
 
@@ -88,7 +88,7 @@ function App() {
         });
     }
     fetchCountryInfo();
-  }, [country])
+  }, [country]);
 
   const onCountryChange = (selectedCountry) => setCountry(selectedCountry);
 

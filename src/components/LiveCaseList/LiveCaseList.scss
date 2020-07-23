@@ -1,6 +1,6 @@
 .liveCaselist {
     margin-bottom: 20px;
-    
+
     .liveCaselist__title {
         color: #a71308;
         margin-bottom: 20px;
@@ -21,6 +21,17 @@
             .liveCaseList__country,
             .liveCaseList__totalcase {
                 padding: 0.5rem;
+            }
+            .liveCaseList__country {
+                display: flex;
+                align-items: center;
+
+                small {
+                    color: #092ae4;
+                    cursor: pointer;
+                    margin-left: 3px;
+                    font-style: oblique;
+                }
             }
         }
     }

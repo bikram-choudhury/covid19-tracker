@@ -1,13 +1,24 @@
+import React, { useEffect, useState, memo, useMemo } from 'react';
+import numeral from 'numeral';
 import { InputAdornment, TextField } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import numeral from 'numeral';
-import React, { useEffect, useState, memo } from 'react';
+import DialogForStateData from '../DialogForStateData/DialogForStateData';
 import './LiveCaseList.scss';
 
 function LiveCaseList({ countriesWithData }) {
 
     const [filtterdCountries, setFiltterdCountries] = useState([]);
     const [filteredInput, setFilteredInput] = useState("");
+    const [country, setCountry] = useState("");
+    const [showDialog, setShowDialog] = useState(false);
+
+    const stateDataDialog = useMemo(() => (
+        <DialogForStateData
+            country={country}
+            showDialog={showDialog}
+            onClose={() => setShowDialog(false)}
+        />
+    ), [country, showDialog])
 
     useEffect(() => {
         if (filteredInput) {
@@ -21,7 +32,7 @@ function LiveCaseList({ countriesWithData }) {
     }, [filteredInput, countriesWithData])
 
     const handleChange = ({ target: { value } }) => setFilteredInput(value);
-    
+
     return (
         <div className="liveCaselist">
             <h3 className="liveCaselist__title">LIVE CASES</h3>
@@ -40,7 +51,20 @@ function LiveCaseList({ countriesWithData }) {
                     filtterdCountries?.length > 0 ? (
                         filtterdCountries.map(({ country, cases }, index) => (
                             <div className="liveCaseList__row" key={index}>
-                                <div className="liveCaseList__country">{country}</div>
+                                <div className="liveCaseList__country">
+                                    <span>{country}</span>
+                                    {
+                                        country.toLowerCase() === "india" && (
+                                            <small onClick={
+                                                () => {
+                                                    setCountry(country);
+                                                    setShowDialog(!showDialog);
+                                                }
+                                            }>(statewise)</small>
+                                        )
+                                    }
+
+                                </div>
                                 <div className="liveCaseList__totalcase">
                                     <strong>{numeral(cases).format("0,0")}</strong>
                                 </div>
@@ -53,6 +77,7 @@ function LiveCaseList({ countriesWithData }) {
                         )
                 }
             </div>
+            {stateDataDialog}
         </div >
     );
 }
