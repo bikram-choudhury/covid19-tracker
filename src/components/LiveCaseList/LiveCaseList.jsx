@@ -37,7 +37,7 @@ function LiveCaseList({ countriesWithData }) {
         <div className="liveCaselist">
             <h3 className="liveCaselist__title">LIVE CASES</h3>
             <TextField
-                label="With normal TextField"
+                label="Search by country"
                 onChange={handleChange}
                 InputProps={{
                     startAdornment: (

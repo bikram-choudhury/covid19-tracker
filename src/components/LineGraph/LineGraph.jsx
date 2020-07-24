@@ -63,7 +63,24 @@ const buildChartData = (data, caseType) => {
     };
     return chartData;
 };
-
+function getTitle(caseType) {
+    let title = "World's new registered ";
+    switch (caseType) {
+        case 'cases':
+            title += 'cases';
+            break;
+        case 'recovered':
+            title += 'recovered cases';
+            break;
+        case 'deaths':
+            title += 'deaths';
+            break;
+        default:
+            title = "World's new cases ";
+            break;
+    }
+    return title;
+}
 function LineGraph({ caseType, ...props }) {
 
     const [data, setData] = useState([]);
@@ -80,9 +97,10 @@ function LineGraph({ caseType, ...props }) {
         fetchData();
     }, [caseType]);
 
+
     return (
         <div className={props.className}>
-            <h3 className="app_graphTitle">World new {caseType}</h3>
+            <h3 className="app_graphTitle">{getTitle(caseType)}</h3>
             {
                 data?.length > 0 && (
                     <Line

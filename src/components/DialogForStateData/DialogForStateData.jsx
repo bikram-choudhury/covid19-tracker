@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 
-import SimpleTable from '../SimpleTable/SimpleTable';
+import TableForStatewiseData from '../TableForStatewiseData/TableForStatewiseData';
 import { API_PREFIX } from '../../config';
 
 const styles = (theme) => ({
@@ -55,6 +55,7 @@ const DialogActions = withStyles((theme) => ({
 
 function DialogForStateData({ country, showDialog, onClose }) {
 
+    const StateWiseDataHeader = ['State', 'Total', 'Active', 'Recovered', 'Deaths'];
     const [stateInfo, setStateInfo] = useState([]);
     useEffect(() => {
         const url = `${API_PREFIX}/gov/${country}`;
@@ -72,11 +73,11 @@ function DialogForStateData({ country, showDialog, onClose }) {
     return (
 
         <Dialog fullWidth onClose={handleClose} aria-labelledby="dialog-title" open={showDialog} maxWidth={'md'}>
-            <DialogTitle onClose={handleClose}> StateWise Data [{country}] </DialogTitle>
+            <DialogTitle onClose={handleClose}> Statewise info [{country}] </DialogTitle>
             <DialogContent dividers>
                 {
                     stateInfo?.length ? (
-                        <SimpleTable header={Object.keys(stateInfo[0])} body={stateInfo} />
+                        <TableForStatewiseData header={StateWiseDataHeader} body={stateInfo} />
                     ) : (
                             <Typography gutterBottom >
                                 No data available
@@ -93,7 +94,7 @@ function DialogForStateData({ country, showDialog, onClose }) {
     )
 }
 
-SimpleTable.propTypes = {
+DialogForStateData.propTypes = {
     country: PropTypes.string,
     showDialog: PropTypes.bool,
     onClose: PropTypes.func

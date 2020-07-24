@@ -8,6 +8,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { sortData } from '../../utils';
 
 const useStyles = makeStyles({
     table: {
@@ -34,7 +35,8 @@ const StyledTableRow = withStyles((theme) => ({
     },
 }))(TableRow);
 
-function SimpleTable({ header, body }) {
+function TableForStatewiseData({ header, body }) {
+    const sortedData = sortData(body, 'total');
     const classes = useStyles();
     return (
         <TableContainer>
@@ -50,7 +52,7 @@ function SimpleTable({ header, body }) {
                 </TableHead>
                 <TableBody>
                     {
-                        body.map(data => (
+                        sortedData.map(data => (
                             <StyledTableRow key={data.state}>
                                 <TableCell>{data.state}</TableCell>
                                 <TableCell>
@@ -74,10 +76,10 @@ function SimpleTable({ header, body }) {
     )
 }
 
-SimpleTable.propTypes = {
+TableForStatewiseData.propTypes = {
     header: PropTypes.arrayOf(PropTypes.string),
     body: PropTypes.array
 };
 
-export default SimpleTable;
+export default TableForStatewiseData;
 

@@ -2,9 +2,9 @@ import React from 'react'
 import numeral from 'numeral';
 import { Circle, Popup } from 'react-leaflet';
 
-export const sortData = data => {
+export const sortData = (data, sortOn = 'cases') => {
     const sortedData = data ? [...data] : [];
-    return sortedData.sort((prev, next) => prev.cases > next.cases ? -1 : 1);
+    return sortedData.sort((prev, next) => prev[sortOn] > next[sortOn] ? -1 : 1);
 };
 
 export const prettyPrintStat = stat => stat ? `+${numeral(stat).format("0,0")}` : "+0";
