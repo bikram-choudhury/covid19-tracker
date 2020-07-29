@@ -36,7 +36,7 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 function TableForStatewiseData({ header, body }) {
-    const sortedData = sortData(body, 'total');
+    const sortedData = sortData(body, 'cases');
     const classes = useStyles();
     return (
         <TableContainer>
@@ -56,7 +56,7 @@ function TableForStatewiseData({ header, body }) {
                             <StyledTableRow key={data.state}>
                                 <TableCell>{data.state}</TableCell>
                                 <TableCell>
-                                    {numeral(data.total).format("0,0")}
+                                    {numeral(data.cases).format("0,0")}
                                 </TableCell>
                                 <TableCell>
                                     {numeral(data.active).format("0,0")}
