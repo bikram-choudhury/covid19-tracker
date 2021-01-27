@@ -97,6 +97,10 @@ function App() {
       <div className="app__left">
         <div className="app__header">
           <h1>COVID-19 TRACKER</h1>
+
+
+
+          
           <DropdownWithSearchInput
             selectedValue={country}
             onSelected={onCountryChange}
